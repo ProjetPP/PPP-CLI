@@ -23,7 +23,7 @@ setup(
         'Topic :: Internet :: WWW/HTTP :: WSGI :: Application',
     ],
     install_requires=[
-        'ppp_datamodel>=0.7,<0.8',
+        'ppp_datamodel>=0.6.1,<0.7',
         'ppp_datamodel_notation_parser',
     ],
     packages=[
