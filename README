@@ -1,0 +1,7 @@
+A command-line tool to send requests to the PPP and display results
+in a readable way.
+
+Install: pip3 install --user ppp_cli
+
+Use: python3 -m ppp_cli "Where is ENS Lyon?"
+
