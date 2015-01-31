@@ -20,7 +20,10 @@ parser.add_argument('--parse', action='store_true',
         default=False,
         help='Determines whether the request should be parsed according '
              'to the datamodel notation.')
+parser.add_argument('--dot', action='store_true',
+        default=False,
+        help='Use dot format as output instead of pretty-printer.')
 parser.add_argument('request')
 
 args = parser.parse_args()
-main.main(args.api, args.id, args.language, args.parse, args.request)
+main.main(args.api, args.id, args.language, args.parse, args.request, args.dot)

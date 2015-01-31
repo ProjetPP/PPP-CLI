@@ -1,5 +1,6 @@
 import sys
 
+import ppp_datamodel
 from ppp_datamodel.nodes import *
 from ppp_datamodel.communication import *
 
@@ -76,6 +77,18 @@ def missing(node, indent):
 @register(Resource)
 def resource(node, indent):
     prettyprint(node.value, indent)
+
+@register(MathLatexResource)
+def mathlatexresource(node, indent):
+    print_(indent, 'value:')
+    prettyprint(node.value, indent)
+    try:
+        latex = node.latex
+    except ppp_datamodel.exceptions.AttributeNotProvided:
+        pass
+    else:
+        print_(indent, 'latex:')
+        prettyprint(node.latex, indent)
 
 @register(JsonldResource)
 def jsonldresource(node, indent):
