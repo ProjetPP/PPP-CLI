@@ -16,7 +16,7 @@ def predicate(node):
         print('%s [ label = "%s" ];' % (name, node.value))
     elif isinstance(node, Missing):
         print('%s [ label = "?" ];' % (name,))
-        print('fooooooo')
+    elif isinstance(node, List):
         print('%s [ label = "list" ];' % (name,))
         for item in node.list:
             print('%s -> %s;' %
