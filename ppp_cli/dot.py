@@ -1,9 +1,8 @@
 import sys
-from ppp_datamodel.nodes import Resource, Missing, AbstractNode
+from ppp_datamodel.nodes import Resource, Missing, AbstractNode, List
 
-class DotName(AbstractNode):
-    _type = 'dotname'
-    _possible_attributes = ('name',)
+class DotName(Resource):
+    _value_type = 'dotname'
 
 counter = 0
 def make_fresh():
@@ -13,10 +12,15 @@ def make_fresh():
 
 def predicate(node):
     name = make_fresh()
-    if isinstance(node, Resource):
+    if isinstance(node, Resource) and not isinstance(node, DotName):
         print('%s [ label = "%s" ];' % (name, node.value))
     elif isinstance(node, Missing):
         print('%s [ label = "?" ];' % (name,))
+        print('fooooooo')
+        print('%s [ label = "list" ];' % (name,))
+        for item in node.list:
+            print('%s -> %s;' %
+                (name, item.value))
     else:
         print('%s [ label = "%s" ];' % (name, node.type))
         for (attrname, attr) in node._attributes.items():
@@ -25,9 +29,9 @@ def predicate(node):
             if not isinstance(attr, (list, tuple)):
                 attr = [attr]
             for child in attr:
-                assert isinstance(child, DotName), childdot
+                assert isinstance(child, DotName), child
                 print('%s -> %s [ label = "%s" ];' %
-                    (name, child.name, attrname))
+                    (name, child.value, attrname))
     return DotName(name)
 
 
