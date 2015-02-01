@@ -19,12 +19,15 @@ def predicate(node):
         print('%s [ label = "?" ];' % (name,))
     else:
         print('%s [ label = "%s" ];' % (name, node.type))
-        for (attrname, childdot) in node._attributes.items():
+        for (attrname, attr) in node._attributes.items():
             if attrname in ('type', 'value_type'):
                 continue
-            assert isinstance(childdot, DotName), childdot
-            print('%s -> %s [ label = "%s" ];' %
-                (name, childdot.name, attrname))
+            if not isinstance(attr, (list, tuple)):
+                attr = [attr]
+            for child in attr:
+                assert isinstance(child, DotName), childdot
+                print('%s -> %s [ label = "%s" ];' %
+                    (name, child.name, attrname))
     return DotName(name)
 
 
