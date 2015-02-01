@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='ppp_cli',
-    version='0.1',
+    version='0.2',
     description='Command-line tool for debugging PPP modules',
     url='https://github.com/ProjetPP/PPP-CLI',
     author='Valentin Lorentz',
@@ -23,7 +23,7 @@ setup(
         'Topic :: Internet :: WWW/HTTP :: WSGI :: Application',
     ],
     install_requires=[
-        'ppp_datamodel>=0.6.1,<0.7',
+        'ppp_datamodel>=0.6.3,<0.7',
         'ppp_datamodel_notation_parser',
     ],
     packages=[
