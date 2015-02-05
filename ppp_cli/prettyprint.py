@@ -95,6 +95,21 @@ def jsonldresource(node, indent):
     print_(indent, node.value)
     prettyprint(node.graph, indent)
 
+@register(Sort)
+def sort(node, indent):
+    print_(indent, 'Sort (%s):' % node.predicate)
+    prettyprint(node.list, indent)
+
+@register(Last)
+def last(node, indent):
+    print_(indent, 'Last:')
+    prettyprint(node.list, indent)
+
+@register(First)
+def first(node, indent):
+    print_(indent, 'First:')
+    prettyprint(node.list, indent)
+
 PRETTYPRINTERS.reverse()
 def prettyprint(node, indent=-1):
     for (cls, prettyprinter) in PRETTYPRINTERS:
