@@ -70,6 +70,20 @@ def list(node, indent):
         print_(indent, '*')
         prettyprint(item, indent)
 
+@register(Intersection)
+def list(node, indent):
+    print_(indent, 'Intersection:')
+    for item in node.list:
+        print_(indent, '*')
+        prettyprint(item, indent)
+
+@register(Union)
+def list(node, indent):
+    print_(indent, 'Union:')
+    for item in node.list:
+        print_(indent, '*')
+        prettyprint(item, indent)
+
 @register(Missing)
 def missing(node, indent):
     print_(indent, '?', False)
