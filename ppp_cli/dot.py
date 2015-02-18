@@ -1,9 +1,13 @@
 import sys
 from ppp_datamodel.nodes import Resource, Missing, AbstractNode, List, Triple
 
-class DotNode(AbstractNode):
+# Making it a subclass of resource is hack to allow it to be an
+# item of a List node.
+class DotNode(Resource):
     _type = 'dotnode'
-    _possible_attributes = ('name', 'label', 'original')
+    _possible_attributes = ('name', 'label', 'original', 'value')
+    def __init__(self, *args):
+        super().__init__(*args, value='')
 
 counter = 0
 def make_fresh():
@@ -20,9 +24,9 @@ def predicate(node):
     elif isinstance(node, List):
         label = 'list'
         for item in node.list:
-            print('%s [ label = "%s" ];' % (child.name, child.label))
-            print('%s -> %s;' %
-                (name, item.value))
+            assert isinstance(item, DotNode), item
+            print('%s [ label = "%s" ];' % (item.name, item.label))
+            print('%s -> %s;' % (name, item.name))
     else:
         label = node.type
         for (attrname, attr) in node._attributes.items():
