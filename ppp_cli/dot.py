@@ -44,7 +44,8 @@ def predicate(node):
 
 
 def print_tree(node):
-    node.traverse(predicate)
+    node = node.traverse(predicate)
+    print('%s [ label = "%s" ];' % (node.name, node.label))
 
 def print_responses(responses):
     print('digraph G {\n')
