@@ -1,8 +1,8 @@
 import sys
 from ppp_datamodel.nodes import Resource, Missing, AbstractNode, List, Triple
 
-class DotName(AbstractNode):
-    _type = 'dotname'
+class DotNode(AbstractNode):
+    _type = 'dotnode'
     _possible_attributes = ('name', 'label', 'original')
 
 counter = 0
@@ -13,7 +13,7 @@ def make_fresh():
 
 def predicate(node):
     name = make_fresh()
-    if isinstance(node, Resource) and not isinstance(node, DotName):
+    if isinstance(node, Resource) and not isinstance(node, DotNode):
         label = node.value
     elif isinstance(node, Missing):
         label = '?'
@@ -31,7 +31,7 @@ def predicate(node):
             if not isinstance(attr, (list, tuple)):
                 attr = [attr]
             for child in attr:
-                assert isinstance(child, DotName), child
+                assert isinstance(child, DotNode), child
                 if isinstance(node, Triple) and \
                         attrname == 'inverse_predicate' and \
                         isinstance(child.original, List) and \
@@ -40,7 +40,7 @@ def predicate(node):
                 print('%s [ label = "%s" ];' % (child.name, child.label))
                 print('%s -> %s [ label = "%s" ];' %
                     (name, child.name, attrname))
-    return DotName(name, label, node)
+    return DotNode(name, label, node)
 
 
 def print_tree(node):
